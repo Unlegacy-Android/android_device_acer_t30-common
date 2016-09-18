@@ -105,10 +105,13 @@ PRODUCT_COPY_FILES += \
     device/acer/t30-common/tiny_hw.xml:system/etc/sound/$(PRODUCT_BOOTLOADER) \
     device/acer/t30-common/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf
 
-# media config xml file
+# Media
 PRODUCT_COPY_FILES += \
     device/acer/t30-common/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
     device/acer/t30-common/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
+
+PRODUCT_PACKAGES += \
+    libstagefrighthw
 
 WIFI_BAND := 802_11_BG
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
