@@ -37,6 +37,8 @@ TARGET_KERNEL_CONFIG := picasso_defconfig
 
 BOARD_USES_GENERIC_INVENSENSE := false
 
+TARGET_NEEDS_PLATFORM_TEXTRELS := true
+
 -include vendor/acer/t30-common/BoardConfigVendor.mk
 
 # Bluetooth
