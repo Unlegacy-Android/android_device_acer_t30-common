@@ -57,7 +57,6 @@ BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUEDROID_VENDOR_CONF := device/acer/t30-common/libbt_vndcfg.txt
 
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/acer/t30-common/prebuilt/etc/egl.cfg
 BOARD_EGL_SKIP_FIRST_DEQUEUE := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
