@@ -63,7 +63,7 @@ PRODUCT_COPY_FILES += \
     device/acer/t30-common/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     device/acer/t30-common/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up \
     device/acer/t30-common/prebuilt/etc/ppp/ip-down:system/etc/ppp/ip-down \
-    device/acer/t30-common/prebuilt/usr/idc/acer-touch.idc:system/usr/idc/acer-touch.idc \
+    device/acer/t30-common/prebuilt/usr/idc/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \
     device/acer/t30-common/prebuilt/usr/keylayout/Acer-AK00LB.kl:system/usr/keylayout/Acer-AK00LB.kl \
     device/acer/t30-common/prebuilt/usr/keylayout/Acer-ICONIA-TAB-KB01.kl:system/usr/keylayout/Acer-ICONIA-TAB-KB01.kl \
     device/acer/t30-common/prebuilt/usr/keylayout/acer-dock.kl:system/usr/keylayout/acer-dock.kl \
