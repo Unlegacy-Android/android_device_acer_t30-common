@@ -72,9 +72,6 @@ USE_CAMERA_STUB := false
 # Already disabled in kernel, but disable again for safety
 BOARD_SUPPRESS_EMMC_WIPE := true
 
-# healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.t30
-
 # Selinux
 BOARD_SEPOLICY_DIRS += \
 	device/acer/t30-common/sepolicy
