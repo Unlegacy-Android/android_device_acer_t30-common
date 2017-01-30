@@ -53,7 +53,7 @@ NVOMXPlugin::NVOMXPlugin()
 
         (*mInit)();
     } else {
-        ALOGE("%s: failed to load %s", __func__, LIBOMX);
+        ALOGE("%s: failed to load %s: %s", __func__, LIBOMX, dlerror());
     }
 }
 
