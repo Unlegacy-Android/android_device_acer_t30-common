@@ -102,7 +102,7 @@ PRODUCT_CHARACTERISTICS := tablet
 
 # Audio config
 PRODUCT_COPY_FILES += \
-    device/acer/t30-common/tiny_hw.xml:system/etc/sound/$(PRODUCT_BOOTLOADER) \
+    device/acer/t30-common/tiny_hw.xml:system/etc/tiny_hw.xml \
     device/acer/t30-common/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf
 
 # Media

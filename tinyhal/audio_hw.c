@@ -1110,13 +1110,10 @@ static int adev_config_parse(struct tiny_audio_device *adev)
     FILE *f;
     XML_Parser p;
     char property[PROPERTY_VALUE_MAX];
-    char file[80];
+    char file[] = "/system/etc/tiny_hw.xml";
     int ret = 0;
     bool eof = false;
     int len;
-
-    property_get("ro.product.device", property, "tiny_hw");
-    snprintf(file, sizeof(file), "/system/etc/sound/%s", property);
 
     ALOGV("Reading configuration from %s\n", file);
     f = fopen(file, "r");
