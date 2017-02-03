@@ -60,6 +60,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
 PRODUCT_COPY_FILES += \
+    device/acer/t30-common/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf \
     device/acer/t30-common/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
     device/acer/t30-common/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up \
     device/acer/t30-common/prebuilt/etc/ppp/ip-down:system/etc/ppp/ip-down \
