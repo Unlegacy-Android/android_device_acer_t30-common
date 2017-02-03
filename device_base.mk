@@ -31,12 +31,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# We copy fstab twice, fstab.acer for init, fstab.$(PRODUCT_BOOTLOADER) for vold
 PRODUCT_COPY_FILES += \
-    device/acer/t30-common/prebuilt/ramdisk/init.target.rc:root/init.$(PRODUCT_BOOTLOADER).rc \
-    device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.acer \
-    device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.$(PRODUCT_BOOTLOADER) \
-    device/acer/t30-common/prebuilt/ramdisk/ueventd.target.rc:root/ueventd.$(PRODUCT_BOOTLOADER).rc
+    device/acer/t30-common/prebuilt/ramdisk/init.picasso.rc:root/init.picasso.rc \
+    device/acer/t30-common/prebuilt/ramdisk/fstab.picasso:root/fstab.picasso \
+    device/acer/t30-common/prebuilt/ramdisk/ueventd.picasso.rc:root/ueventd.picasso.rc
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
