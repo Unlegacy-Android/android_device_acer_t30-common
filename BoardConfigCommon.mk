@@ -29,23 +29,11 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER        := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
 BOARD_WLAN_DEVICE           := bcmdhd
-#WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/bcm4329.ko"
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 
-# Wi-Fi AP
-BOARD_LEGACY_NL80211_STA_EVENTS := true
-BOARD_NO_APSME_ATTR := true
-
 TARGET_KERNEL_SOURCE := kernel/acer/t30
-
-# Avoid the generation of ldrcc instructions
-NEED_WORKAROUND_CORTEX_A9_745320 := true
-
-BOARD_USES_GENERIC_AUDIO := false
-BOARD_USES_ALSA_AUDIO := false
-BOARD_USES_TINY_AUDIO_HW := true
 
 BOARD_USES_GENERIC_INVENSENSE := false
 
@@ -54,16 +42,8 @@ BOARD_USES_GENERIC_INVENSENSE := false
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUEDROID_VENDOR_CONF := device/acer/t30-common/libbt_vndcfg.txt
 
 USE_OPENGL_RENDERER := true
-
-# Camera
-USE_CAMERA_STUB := false
-
-# Samsung EMMC brick bug
-# Already disabled in kernel, but disable again for safety
-BOARD_SUPPRESS_EMMC_WIPE := true
 
 # Selinux
 BOARD_SEPOLICY_DIRS += \
@@ -84,21 +64,4 @@ BOARD_SEPOLICY_UNION += \
 # Recovery
 TARGET_RECOVERY_FSTAB := device/acer/t30-common/prebuilt/ramdisk/fstab.acer
 BOARD_HAS_NO_SELECT_BUTTON := true
-# Use this flag if the board has a ext4 partition larger than 2gb
-BOARD_HAS_LARGE_FILESYSTEM := true
 TARGET_RELEASETOOLS_EXTENSIONS := device/acer/t30-common
-BOARD_CUSTOM_BOOTIMG_MK := device/acer/t30-common/custombootimg.mk
-TARGET_NO_SEPARATE_RECOVERY := true
-
-# TWRP config
-RECOVERY_SDCARD_ON_DATA := true
-TW_FLASH_FROM_STORAGE := true
-TW_INCLUDE_FB2PNG := true
-HAVE_SELINUX := true
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/pwm-backlight/brightness"
-TW_MAX_BRIGHTNESS := 255
-
-TW_INTERNAL_STORAGE_PATH := "/data/media"
-TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"

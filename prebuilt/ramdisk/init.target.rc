@@ -86,18 +86,6 @@ on boot
 # backlight
     chown system system /sys/class/backlight/pwm-backlight/brightness
 
-# Touch
-    chmod 644 /sys/Touch/plugged
-    chmod 664 /sys/Touch/sensitivity_raw
-    chmod 664 /sys/Touch/filter
-    chown system system /sys/Touch/plugged
-    chown system system /sys/Touch/sensitivity_raw
-    chown system system /sys/Touch/filter
-    restorecon /sys/Touch/sensitivity_raw
-
-    # Default to "very high" sensitivity
-    write /sys/Touch/sensitivity_raw 50
-
 # powerkey led
     chown system system /sys/class/leds/acer-leds/brightness
 

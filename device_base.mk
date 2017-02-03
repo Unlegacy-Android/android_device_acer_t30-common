@@ -1,5 +1,3 @@
-$(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
-
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
@@ -22,10 +20,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp,adb
 
-# Don't store dalvik on /cache, it gets annoying when /cache is wiped
-# by the bootloader everytime we boot into recovery
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dexopt-data-only=1 \
     dalvik.vm.heapstartsize=8m \
     dalvik.vm.heapgrowthlimit=96m \
     dalvik.vm.heapsize=384m \
@@ -41,8 +36,7 @@ PRODUCT_COPY_FILES += \
     device/acer/t30-common/prebuilt/ramdisk/init.target.rc:root/init.$(PRODUCT_BOOTLOADER).rc \
     device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.acer \
     device/acer/t30-common/prebuilt/ramdisk/fstab.acer:root/fstab.$(PRODUCT_BOOTLOADER) \
-    device/acer/t30-common/prebuilt/ramdisk/ueventd.target.rc:root/ueventd.$(PRODUCT_BOOTLOADER).rc \
-    device/acer/t30-common/prebuilt/ramdisk/twrp.fstab:recovery/root/etc/twrp.fstab
+    device/acer/t30-common/prebuilt/ramdisk/ueventd.target.rc:root/ueventd.$(PRODUCT_BOOTLOADER).rc
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
@@ -76,15 +70,10 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_PACKAGES += \
     audio.primary.tegra3 \
-    libaudioutils \
     audio.a2dp.default \
     audio.usb.default \
     a1026_init \
-    make_ext4fs \
     setup_fs \
-    l2ping \
-    hcitool \
-    bttest \
     com.android.future.usb.accessory
 
 # Live wallpaper packages
@@ -92,8 +81,7 @@ PRODUCT_PACKAGES += \
     LiveWallpapers \
     LiveWallpapersPicker \
     MagicSmokeWallpapers \
-    VisualizationWallpapers \
-    librs_jni
+    VisualizationWallpapers
 
 # Publish that we support the live wallpaper feature.
 PRODUCT_COPY_FILES += \
