@@ -75,7 +75,7 @@ PRODUCT_COPY_FILES += \
     device/acer/t30-common/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
 PRODUCT_PACKAGES += \
-    audio.primary.tegra \
+    audio.primary.tegra3 \
     libaudioutils \
     audio.a2dp.default \
     audio.usb.default \
@@ -115,6 +115,11 @@ PRODUCT_PACKAGES += \
     libstagefrighthw
 
 WIFI_BAND := 802_11_BG
+
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
-$(call inherit-product-if-exists, vendor/acer/t30-common/t30-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/acer/picasso/acer-vendor.mk)
+$(call inherit-product-if-exists, vendor/broadcom/picasso/broadcom-vendor.mk)
+$(call inherit-product-if-exists, vendor/invensense/picasso/invensense-vendor.mk)
+$(call inherit-product-if-exists, vendor/nvidia/tegra3/nvidia-vendor.mk)
+$(call inherit-product-if-exists, vendor/widevine/tegra3/widevine-vendor.mk)
