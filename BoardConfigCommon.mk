@@ -62,6 +62,6 @@ BOARD_SEPOLICY_UNION += \
 	zygote.te
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/acer/t30-common/prebuilt/ramdisk/fstab.acer
+TARGET_RECOVERY_FSTAB := device/acer/t30-common/rootdir/fstab.picasso
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RELEASETOOLS_EXTENSIONS := device/acer/t30-common

@@ -32,9 +32,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_COPY_FILES += \
-    device/acer/t30-common/prebuilt/ramdisk/init.picasso.rc:root/init.picasso.rc \
-    device/acer/t30-common/prebuilt/ramdisk/fstab.picasso:root/fstab.picasso \
-    device/acer/t30-common/prebuilt/ramdisk/ueventd.picasso.rc:root/ueventd.picasso.rc
+    device/acer/t30-common/rootdir/init.picasso.rc:root/init.picasso.rc \
+    device/acer/t30-common/rootdir/fstab.picasso:root/fstab.picasso \
+    device/acer/t30-common/rootdir/ueventd.picasso.rc:root/ueventd.picasso.rc
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
@@ -52,15 +52,15 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
 
 PRODUCT_COPY_FILES += \
-    device/acer/t30-common/prebuilt/etc/nvcamera.conf:system/etc/nvcamera.conf \
-    device/acer/t30-common/prebuilt/etc/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
-    device/acer/t30-common/prebuilt/etc/ppp/ip-up:system/etc/ppp/ip-up \
-    device/acer/t30-common/prebuilt/etc/ppp/ip-down:system/etc/ppp/ip-down \
-    device/acer/t30-common/prebuilt/usr/idc/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \
-    device/acer/t30-common/prebuilt/usr/keylayout/Acer-AK00LB.kl:system/usr/keylayout/Acer-AK00LB.kl \
-    device/acer/t30-common/prebuilt/usr/keylayout/Acer-ICONIA-TAB-KB01.kl:system/usr/keylayout/Acer-ICONIA-TAB-KB01.kl \
-    device/acer/t30-common/prebuilt/usr/keylayout/acer-dock.kl:system/usr/keylayout/acer-dock.kl \
-    device/acer/t30-common/prebuilt/usr/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
+    device/acer/t30-common/camera/nvcamera.conf:system/etc/nvcamera.conf \
+    device/acer/t30-common/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
+    device/acer/t30-common/ppp/ip-up:system/etc/ppp/ip-up \
+    device/acer/t30-common/ppp/ip-down:system/etc/ppp/ip-down \
+    device/acer/t30-common/touchscreen/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \
+    device/acer/t30-common/keylayouts/Acer-AK00LB.kl:system/usr/keylayout/Acer-AK00LB.kl \
+    device/acer/t30-common/keylayouts/Acer-ICONIA-TAB-KB01.kl:system/usr/keylayout/Acer-ICONIA-TAB-KB01.kl \
+    device/acer/t30-common/keylayouts/acer-dock.kl:system/usr/keylayout/acer-dock.kl \
+    device/acer/t30-common/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
@@ -89,13 +89,13 @@ PRODUCT_CHARACTERISTICS := tablet
 
 # Audio config
 PRODUCT_COPY_FILES += \
-    device/acer/t30-common/tiny_hw.xml:system/etc/tiny_hw.xml \
-    device/acer/t30-common/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf
+    device/acer/t30-common/audio/tiny_hw.xml:system/etc/tiny_hw.xml \
+    device/acer/t30-common/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # Media
 PRODUCT_COPY_FILES += \
-    device/acer/t30-common/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
-    device/acer/t30-common/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
+    device/acer/t30-common/media/media_profiles.xml:system/etc/media_profiles.xml \
+    device/acer/t30-common/media/media_codecs.xml:system/etc/media_codecs.xml
 
 PRODUCT_PACKAGES += \
     libstagefrighthw
