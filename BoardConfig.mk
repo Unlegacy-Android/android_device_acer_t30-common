@@ -69,4 +69,3 @@ BOARD_SEPOLICY_UNION += \
 # Recovery
 TARGET_RECOVERY_FSTAB := device/acer/picasso2/rootdir/fstab.picasso
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RELEASETOOLS_EXTENSIONS := device/acer/picasso2
