@@ -1,1 +1,2 @@
 type sysfs_devices_tegradc, fs_type, sysfs_type;
+type sysfs_devices_nvavp, fs_type, sysfs_type;
