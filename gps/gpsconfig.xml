@@ -13,7 +13,6 @@
     acPortName="/dev/ttyHS1" 
     lBaudRate="115200"  
     
-    cLogEnableInitState="true"
     cLogEnabled="false"
     acLogDirectory="/data/gps/log/"
 
@@ -58,9 +57,7 @@
     LbsLocal="false"
     LbsServer="bcmls2.glpals.com"
     LbsPort="7275"
-    LbsSyncTimeSec="60"
     LbsSyncLto="true"
-    LbsSyncCells="true"
 />
 
 <!-- SUPL: only applicable to devices with cellular modem
@@ -75,27 +72,18 @@
     arp-supl-use-apn="true"
     acSuplServer="www.spirent-lcs.com"
     SuplPort="7275"
-    tlsCertPath="/system/bin/gpsd/"
-    TISEnabled="false" 
-    RILEnabled="true" 
+    tlsCertPath="/vendor/bin/gpsd/"
 />
 
 <!-- Client-Base Extended Ephemeris (CBEE) -->
 <hal
     acEEDir="/data/gps/"
     acEEFileName="cbee.cbee"
-    arp-cbee-write-nvmem-on-new-be="true"
-    arp-cbee-signal-cbeegen-on-new-be="true"
-    arp-cbee-cbeegen-app-path="/data/gps/cbee_gen"
-    arp-cbee-cbeegen-app-param="-debug -ln=/data/gps/log/cbee_gen_log.txt"
 />
 
 <!-- Control Plane: only applicable to devices with cellular modem-->
 <hal
-    cp-enhanced-assisted="false" 
     LPmode="false" 
-    cp-cold-start="false" 
-    cp-guard-time-sec="1"
 />
 
 <!-- Sensors: Valid on Android 2.3 or higher -->
@@ -109,14 +97,6 @@
     SensorsRawAcclGyroEnable="false" 
     
     SensorsStepEnable="false"
-    SensorsAcclInRunBiasCal="true" 
-    SensorsEstBiasInWalking="true" 
-    req_pos.acc="1000"    
-/>
-
-<!-- Android: -->
-<hal 
-    lcsApiSockName="/dev/socket/gps" 
 />
 
 <!-- GLL Engine: See glgpsapi.h for supported parameters -->
