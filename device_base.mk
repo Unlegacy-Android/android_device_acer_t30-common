@@ -16,10 +16,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.carrier=wifi-only \
     ro.zygote.disable_gl_preload=true
 
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp,adb
-
 PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapstartsize=8m \
     dalvik.vm.heapgrowthlimit=96m \
