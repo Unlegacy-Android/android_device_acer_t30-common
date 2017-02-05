@@ -53,4 +53,3 @@ BOARD_SEPOLICY_DIRS += \
 # Recovery
 TARGET_RECOVERY_FSTAB := device/acer/t30-common/rootdir/fstab.picasso
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RELEASETOOLS_EXTENSIONS := device/acer/t30-common
