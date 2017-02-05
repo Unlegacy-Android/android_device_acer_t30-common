@@ -4,27 +4,8 @@ on early-init
     mount debugfs debugfs /sys/kernel/debug
 
 on init
-    # See storage config details at http://source.android.com/tech/storage/
-    mkdir /mnt/shell/emulated 0700 shell shell
-    mkdir /storage/emulated 0555 root root
-
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    export EMULATED_STORAGE_TARGET /storage/emulated
-
-    # Support legacy paths
-    symlink /storage/emulated/legacy /sdcard
-    symlink /storage/emulated/legacy /mnt/sdcard
-    symlink /storage/emulated/legacy /storage/sdcard0
-    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
-
-    export SECONDARY_STORAGE /storage/sdcard1:/storage/usb0
-    mkdir /storage/sdcard1 0000 root root
-    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-    symlink /storage/sdcard1 /mnt/external_sd
-    mkdir /storage/usb0 0000 root root
-    mkdir /mnt/media_rw/usb0 0700 media_rw media_rw
-    symlink /storage/usb0 /mnt/usb_storage
+    symlink /sdcard /mnt/sdcard
+    symlink /sdcard /storage/sdcard0
 
 on fs
     setprop ro.crypto.tmpfs_options size=128m,mode=0771,uid=1000,gid=1000
@@ -40,10 +21,6 @@ on post-fs-data
 
     mkdir /data/gps 770 gps system
     chown gps system /data/gps
-
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
-    chown media_rw media_rw /data/media
 
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
@@ -249,19 +226,6 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
-# virtual sdcard daemon running as media_rw (1023)
-service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
-    class late_start
-
-# fusewrapped external sdcard daemon running as media_rw (1023)
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
-
-service fuse_usb0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb0 /storage/usb0
-    class late_start
-    disabled
-
 # Start GPS daemon
 on boot
   write /sys/class/gpio/export 162
@@ -280,14 +244,6 @@ service gps-daemon /vendor/bin/gpsd -c /system/etc/gps/gpsconfig.xml
   socket gps seqpacket 0660 gps system
   user gps
   group system inet sdcard_rw sdcard_r
-
-# Mount usb drives as /usbdrive. Generally usb drives are formatted with FAT
-# filesystem, so we support FAT as of now.
-# on device-added-/sys/block/sda
-#     mount vfat /dev/block/sda /mnt/usbdrive
-
-# on device-removed-/sys/block/sda
-#     umount /mnt/usbdrive
 
 # start tf_daemon service
 service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
