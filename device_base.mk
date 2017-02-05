@@ -58,6 +58,11 @@ PRODUCT_COPY_FILES += \
     device/acer/t30-common/keylayouts/acer-dock.kl:system/usr/keylayout/acer-dock.kl \
     device/acer/t30-common/keylayouts/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl
 
+# GPS
+PRODUCT_PACKAGES += \
+    libgpsd-compat \
+    libstlport
+
 # Bluetooth
 PRODUCT_COPY_FILES += \
     device/acer/t30-common/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
