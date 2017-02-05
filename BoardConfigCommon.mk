@@ -49,18 +49,6 @@ USE_OPENGL_RENDERER := true
 BOARD_SEPOLICY_DIRS += \
 	device/acer/t30-common/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-	file_contexts \
-	genfs_contexts \
-	app.te \
-	device.te \
-	drmserver.te \
-	file.te \
-	mediaserver.te \
-	surfaceflinger.te \
-	system.te \
-	zygote.te
-
 # Recovery
 TARGET_RECOVERY_FSTAB := device/acer/t30-common/rootdir/fstab.picasso
 BOARD_HAS_NO_SELECT_BUTTON := true
