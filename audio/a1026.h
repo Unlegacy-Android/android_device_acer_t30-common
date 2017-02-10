@@ -37,7 +37,7 @@ enum A1026_TableID {
 	A1026_TABLE_SUSPEND = 99
 };
 
-void a1026_init();
+int a1026_init();
 int a1026_set_config(enum A1026_TableID mode);
 
 #endif

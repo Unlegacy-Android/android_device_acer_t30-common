@@ -1168,7 +1168,9 @@ static int adev_open(const hw_module_t* module, const char* name,
     int ret;
 
     // Initialize A1026 chip required for audio playback
-    a1026_init();
+    ret = a1026_init();
+    if (ret < 0)
+        return -EINVAL;
 
     if (strcmp(name, AUDIO_HARDWARE_INTERFACE) != 0)
         return -EINVAL;
