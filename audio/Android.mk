@@ -10,8 +10,8 @@ LOCAL_C_INCLUDES += \
 	external/expat/lib \
 	system/media/audio_utils/include \
 	system/media/audio_effects/include
-LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioutils \
-	libdl libexpat
+LOCAL_CFLAGS := -Wall -Werror
+LOCAL_SHARED_LIBRARIES := liblog libcutils libtinyalsa libaudioutils libexpat
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
