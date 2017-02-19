@@ -1,0 +1,11 @@
+/system		ext4	/dev/block/platform/sdhci-tegra.3/by-name/CAC
+/cache		ext4	/dev/block/platform/sdhci-tegra.3/by-name/APP
+/data		ext4	/dev/block/platform/sdhci-tegra.3/by-name/UDA	length=-1081344
+/misc		emmc	/dev/block/platform/sdhci-tegra.3/by-name/MSC
+/boot		emmc	/dev/block/platform/sdhci-tegra.3/by-name/LNX
+/recovery	emmc	/dev/block/platform/sdhci-tegra.3/by-name/SOS
+/staging	emmc	/dev/block/platform/sdhci-tegra.3/by-name/USP
+
+# Vold
+/external_sd    auto    	/dev/block/mmcblk1p1	/dev/block/mmcblk1	flags=display="Micro SDcard";storage;wipeingui;removable
+/usb-otg	auto   		/dev/block/sda1		/dev/block/sda		flags=display="USB OTG";storage;wipeingui;removable
