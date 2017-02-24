@@ -1,6 +1,6 @@
 /system		ext4	/dev/block/platform/sdhci-tegra.3/by-name/CAC
-/cache		ext4	/dev/block/platform/sdhci-tegra.3/by-name/APP
-/data		ext4	/dev/block/platform/sdhci-tegra.3/by-name/UDA	length=-1081344
+/cache		auto	/dev/block/platform/sdhci-tegra.3/by-name/APP
+/data		auto	/dev/block/platform/sdhci-tegra.3/by-name/UDA	length=-1081344
 /misc		emmc	/dev/block/platform/sdhci-tegra.3/by-name/MSC
 /boot		emmc	/dev/block/platform/sdhci-tegra.3/by-name/LNX
 /recovery	emmc	/dev/block/platform/sdhci-tegra.3/by-name/SOS
