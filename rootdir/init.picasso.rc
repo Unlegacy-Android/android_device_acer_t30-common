@@ -1,3 +1,5 @@
+import init.tegra3.rc
+
 import init.picasso.usb.rc
 
 on early-init
@@ -70,6 +72,8 @@ on boot
     chown system system /sys/class/graphics/fb0/device/smartdimmer/list_size
     chown system system /sys/class/graphics/fb0/device/smartdimmer/scenario
     chown system system /sys/class/graphics/fb0/device/smartdimmer/aggress_table
+    restorecon /sys/devices/tegradc.0/smartdimmer/aggressiveness
+    restorecon /sys/devices/tegradc.0/smartdimmer/enable
 
 # eeprom
     chown system system /sys/at24/SerialNumberwithoutBarcode
@@ -85,63 +89,11 @@ on boot
     chown system system /sys/bus/iio/devices/device0/als_enable
     chown system system /sys/bus/iio/devices/device0/proximity_enable
 
-# Power management settings
-    write /sys/module/cpu_tegra3/parameters/no_lp 0
-    #write /sys/module/tegra3_emc/parameters/emc_enable 0
-    #write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 1000000
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpufreq/interactive/boost_factor 2
-    write /sys/devices/system/cpu/cpufreq/interactive/input_boost 1
-    write /sys/devices/system/cpu/cpufreq/interactive/sustain_load 80
-    write /sys/module/cpu_tegra3/parameters/auto_hotplug 1
-    write /sys/module/cpuidle/parameters/lp2_in_idle 1
-
-    restorecon /sys/devices/system/cpu
-    restorecon /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/boost
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/boost_factor
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/input_boost
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/io_is_busy
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/max_boost
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/sustain_load
-    restorecon /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-    restorecon /sys/devices/tegradc.0/smartdimmer/aggressiveness
-    restorecon /sys/devices/tegradc.0/smartdimmer/enable
-
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/max_boost
-
     write /sys/class/graphics/fb0/device/smartdimmer/aggress_table 1:1,3/2:3,3/3:3,3
 
 # Default Read Ahead value for sdcards
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
-
-# make binder state/stats readable by root only, so that they are not
-# captured by default in bugreports
-    chmod 0400 /sys/kernel/debug/binder/stats
-    chmod 0400 /sys/kernel/debug/binder/state
-
-#console_suspend
-    chown system system /sys/module/printk/parameters/console_suspend
-
-# Writable nodes for NvCPLSvc, must be behind of Power management settings (scaling_governor interactive)
-    chown system system /sys/kernel/tegra_cap/core_cap_level
-    chown system system /sys/kernel/tegra_cap/core_cap_state
-    chown system system /sys/module/cpu_tegra/parameters/cpu_user_cap
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/go_maxspeed_load
-    chown system system /sys/devices/system/cpu/cpufreq/interactive/max_boost
-
-# EACK
-    chown system system /sys/kernel/debug/tegra_emc/eack_state
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -241,16 +193,6 @@ service gps-daemon /vendor/bin/gpsd -c /system/etc/gps/gpsconfig.xml
   socket gps seqpacket 0660 gps system
   user gps
   group system inet sdcard_rw sdcard_r
-
-# start tf_daemon service
-service tf_daemon /system/bin/tf_daemon -storageDir /data/tf -d
-    class main
-    user root
-    group shell
-
-# may restart due to /data/tf not existing yet
-on property:init.svc.tf_daemon=restarting
-    mkdir /data/tf
 
 # DOCK2 Setting & start service
 on boot
