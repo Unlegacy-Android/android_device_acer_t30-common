@@ -1,12 +1,4 @@
-TARGET_BOARD_PLATFORM := tegra3
-
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_ARCH_VARIANT_CPU := cortex-a9
-TARGET_CPU_VARIANT := cortex-a9
+include hardware/nvidia/tegra3/BoardConfigCommon.mk
 
 TARGET_NO_BOOTLOADER := true
 
@@ -43,8 +35,6 @@ BOARD_USES_GENERIC_INVENSENSE := false
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-
-USE_OPENGL_RENDERER := true
 
 # Selinux
 BOARD_SEPOLICY_DIRS += \
