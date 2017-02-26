@@ -1,12 +1,4 @@
-TARGET_BOARD_PLATFORM := tegra3
-
-TARGET_CPU_ABI := armeabi-v7a
-TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
-TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_ARCH_VARIANT_CPU := cortex-a9
-TARGET_CPU_VARIANT := cortex-a9
+include hardware/nvidia/tegra3/BoardConfigCommon.mk
 
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := picasso
@@ -48,23 +40,13 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/acer/picasso2/bluetooth
 
-USE_OPENGL_RENDERER := true
-
 # Selinux
 BOARD_SEPOLICY_DIRS += \
 	device/acer/picasso2/sepolicy
 
 BOARD_SEPOLICY_UNION += \
 	file_contexts \
-	genfs_contexts \
-	app.te \
-	device.te \
-	drmserver.te \
-	file.te \
-	mediaserver.te \
-	surfaceflinger.te \
-	system.te \
-	zygote.te
+	genfs_contexts
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/acer/picasso2/rootdir/fstab.picasso

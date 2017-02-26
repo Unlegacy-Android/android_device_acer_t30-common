@@ -1,3 +1,8 @@
+# This needs to come before the common nvidia vendor inclusion
+$(call inherit-product-if-exists, vendor/acer/picasso/acer-vendor.mk)
+
+$(call inherit-product, hardware/nvidia/tegra3/tegra3.mk)
+
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_us_supl.mk)
 
@@ -7,14 +12,9 @@ PRODUCT_AAPT_PREF_CONFIG := xlarge hdpi
 DEVICE_PACKAGE_OVERLAYS += device/acer/picasso2/overlay
 
 PRODUCT_PROPERTY_OVERRIDES := \
-    ro.opengles.version=131072 \
-    sys.max_texture_size=2048 \
-    persist.tegra.nvmmlite=1 \
     nvidia.hwc.mirror_mode=crop \
-    tf.enable=y \
     wifi.interface=wlan0 \
-    ro.carrier=wifi-only \
-    ro.zygote.disable_gl_preload=true
+    ro.carrier=wifi-only
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -27,9 +27,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heaptargetutilization=0.75 \
     dalvik.vm.heapminfree=2m \
     dalvik.vm.heapmaxfree=8m
-
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
 
 PRODUCT_COPY_FILES += \
     device/acer/picasso2/rootdir/init.picasso.rc:root/init.picasso.rc \
@@ -97,15 +94,9 @@ PRODUCT_COPY_FILES += \
     device/acer/picasso2/media/media_profiles.xml:system/etc/media_profiles.xml \
     device/acer/picasso2/media/media_codecs.xml:system/etc/media_codecs.xml
 
-PRODUCT_PACKAGES += \
-    libstagefrighthw
-
 WIFI_BAND := 802_11_BG
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4330/device-bcm.mk)
 
-$(call inherit-product-if-exists, vendor/acer/picasso/acer-vendor.mk)
 $(call inherit-product-if-exists, vendor/broadcom/picasso/broadcom-vendor.mk)
 $(call inherit-product-if-exists, vendor/invensense/picasso/invensense-vendor.mk)
-$(call inherit-product-if-exists, vendor/nvidia/tegra3/nvidia-vendor.mk)
-$(call inherit-product-if-exists, vendor/widevine/tegra3/widevine-vendor.mk)
