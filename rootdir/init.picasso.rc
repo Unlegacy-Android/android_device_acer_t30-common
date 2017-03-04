@@ -169,9 +169,9 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
 # Start GPS daemon
 on boot
   write /sys/class/gpio/export 162
-  write /sys/class/gpio/gpio162/value 0
-  write /sys/class/gpio/gpio162/direction out
   write /sys/class/gpio/export 163
+  write /sys/class/gpio/gpio162/direction out
+  write /sys/class/gpio/gpio162/value 0
   write /sys/class/gpio/gpio163/direction out
   write /sys/class/gpio/gpio163/value 1
   chmod 0660 /sys/class/gpio/gpio162/value
