@@ -265,9 +265,9 @@ service fuse_usb0 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/usb0 /stor
 # Start GPS daemon
 on boot
   write /sys/class/gpio/export 162
-  write /sys/class/gpio/gpio162/value 0
-  write /sys/class/gpio/gpio162/direction out
   write /sys/class/gpio/export 163
+  write /sys/class/gpio/gpio162/direction out
+  write /sys/class/gpio/gpio162/value 0
   write /sys/class/gpio/gpio163/direction out
   write /sys/class/gpio/gpio163/value 1
   chmod 0660 /sys/class/gpio/gpio162/value
