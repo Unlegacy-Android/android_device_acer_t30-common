@@ -11,8 +11,9 @@ PRODUCT_AAPT_PREF_CONFIG := xlarge hdpi
 
 DEVICE_PACKAGE_OVERLAYS += device/acer/picasso2/overlay
 
-PRODUCT_PROPERTY_OVERRIDES := \
+PRODUCT_PROPERTY_OVERRIDES += \
     nvidia.hwc.mirror_mode=crop \
+    persist.tegra.didim.enable=0 \
     wifi.interface=wlan0 \
     ro.carrier=wifi-only
 

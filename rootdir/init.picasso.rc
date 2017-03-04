@@ -93,13 +93,6 @@ on boot
 
 # didim
     chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/aggressiveness
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/aggress_list
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/list_size
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/scenario
-    chown system system /sys/class/graphics/fb0/device/smartdimmer/aggress_table
-    restorecon /sys/devices/tegradc.0/smartdimmer/aggressiveness
-    restorecon /sys/devices/tegradc.0/smartdimmer/enable
 
 # eeprom
     chown system system /sys/at24/SerialNumberwithoutBarcode
@@ -114,8 +107,6 @@ on boot
     chown system system /sys/bus/iio/devices/device0/als_ir_mode
     chown system system /sys/bus/iio/devices/device0/als_enable
     chown system system /sys/bus/iio/devices/device0/proximity_enable
-
-    write /sys/class/graphics/fb0/device/smartdimmer/aggress_table 1:1,3/2:3,3/3:3,3
 
 # Default Read Ahead value for sdcards
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
