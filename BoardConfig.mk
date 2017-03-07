@@ -9,6 +9,8 @@ TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_VARIANT := cortex-a9
 
 TARGET_NO_BOOTLOADER := true
+TARGET_BOOTLOADER_BOARD_NAME := picasso
+TARGET_OTA_ASSERT_DEVICE := a510,a700,picasso_m,picasso_mf,a510_emea_cus1,a700_emea_cus1
 
 BOARD_KERNEL_CMDLINE := androidboot.hardware=picasso
 BOARD_KERNEL_BASE := 0x10000000
@@ -33,7 +35,8 @@ WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 
-TARGET_KERNEL_SOURCE := kernel/acer/t30
+TARGET_KERNEL_SOURCE := kernel/nvidia/tegra3
+TARGET_KERNEL_CONFIG := picasso_defconfig
 
 BOARD_USES_GENERIC_INVENSENSE := false
 
@@ -42,12 +45,13 @@ BOARD_USES_GENERIC_INVENSENSE := false
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/acer/picasso2/bluetooth
 
 USE_OPENGL_RENDERER := true
 
 # Selinux
 BOARD_SEPOLICY_DIRS += \
-	device/acer/t30-common/sepolicy
+	device/acer/picasso2/sepolicy
 
 BOARD_SEPOLICY_UNION += \
 	file_contexts \
@@ -62,6 +66,6 @@ BOARD_SEPOLICY_UNION += \
 	zygote.te
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/acer/t30-common/rootdir/fstab.picasso
+TARGET_RECOVERY_FSTAB := device/acer/picasso2/rootdir/fstab.picasso
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RELEASETOOLS_EXTENSIONS := device/acer/t30-common
+TARGET_RELEASETOOLS_EXTENSIONS := device/acer/picasso2
