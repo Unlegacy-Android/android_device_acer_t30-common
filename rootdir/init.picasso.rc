@@ -236,6 +236,13 @@ on boot
 #     class late_start
 #     user system
 
+# detect A510/A700 and set appropriate density
+on property:persist.sys.NV_DISPXRES=1280
+    setprop ro.sf.lcd_density 160
+
+on property:persist.sys.NV_DISPXRES=1920
+    setprop ro.sf.lcd_density 240
+
 # Disable 3G on A700/A510
 on property:ro.boot.carrier=wifi-only
     setprop ro.radio.noril yes
