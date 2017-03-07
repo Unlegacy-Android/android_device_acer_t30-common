@@ -1,0 +1,15 @@
+# Restricted domain for shell processes spawned by init.
+# Normally these are shell commands or scripts invoked via sh
+# from an init*.rc file.  No service should ever run in this domain.
+type init_shell, domain;
+domain_auto_trans(init, shell_exec, init_shell)
+
+# For executing init shell scripts (init.picasso.density.sh)
+allow init_shell rootfs:file entrypoint;
+
+# Allow property changes
+allow init_shell property_socket:sock_file write;
+allow init_shell init:unix_stream_socket connectto;
+
+# Allow changing ro.sf.lcd_density
+allow init_shell sf_lcd_density_prop:property_service set;

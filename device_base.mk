@@ -28,7 +28,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/acer/t30-common/rootdir/init.picasso.rc:root/init.picasso.rc \
     device/acer/t30-common/rootdir/fstab.picasso:root/fstab.picasso \
-    device/acer/t30-common/rootdir/ueventd.picasso.rc:root/ueventd.picasso.rc
+    device/acer/t30-common/rootdir/ueventd.picasso.rc:root/ueventd.picasso.rc \
+    device/acer/t30-common/rootdir/init.picasso.density.sh:root/init.picasso.density.sh
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
