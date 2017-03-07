@@ -27,6 +27,12 @@ on post-fs-data
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
+on property:persist.sys.NV_DISPXRES=1280
+     setprop ro.sf.lcd_density 160
+
+on property:persist.sys.NV_DISPXRES=1920
+     setprop ro.sf.lcd_density 240
+
 on boot
 
 # Create basic usb host device node for USB host manager monitor
