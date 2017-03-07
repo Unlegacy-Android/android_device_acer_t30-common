@@ -31,6 +31,10 @@ on fs
     setprop ro.crypto.umount_sd false
     mount_all /fstab.picasso
 
+# used to ensure lcd_density is only written once
+on load_system_props_action
+    setprop sf.lcd_density.written 0
+
 on post-fs-data
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -310,6 +314,15 @@ on boot
 # service acer_dock_detect /system/bin/acer_dock_daemon
 #     class late_start
 #     user system
+
+# detect A510/A700 and set appropriate density
+on property:persist.sys.NV_DISPXRES=1280 && property:sf.lcd_density.written=0
+    setprop ro.sf.lcd_density 160
+    setprop sf.lcd_density.written 1
+
+on property:persist.sys.NV_DISPXRES=1920 && property:sf.lcd_density.written=0
+    setprop ro.sf.lcd_density 240
+    setprop sf.lcd_density.written 1
 
 # Disable 3G on A700/A510
 on property:ro.boot.carrier=wifi-only
