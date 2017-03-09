@@ -26,7 +26,7 @@ WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/bcmdhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/vendor/firmware/fw_bcmdhd_apsta.bin"
 
-TARGET_KERNEL_SOURCE := kernel/acer/t30
+TARGET_KERNEL_SOURCE := kernel/nvidia/tegra3
 TARGET_KERNEL_CONFIG := picasso_defconfig
 
 BOARD_USES_GENERIC_INVENSENSE := false
