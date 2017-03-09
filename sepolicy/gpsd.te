@@ -1,0 +1,2 @@
+#============= gpsd ==============
+allow gpsd gps_data_file:dir create;
