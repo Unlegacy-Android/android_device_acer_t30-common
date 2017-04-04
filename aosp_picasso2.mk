@@ -17,8 +17,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
 
 # Discard inherited values and use our own instead.
-PRODUCT_NAME := aosp_a510
-PRODUCT_DEVICE := a510
+PRODUCT_NAME := aosp_picasso2
+PRODUCT_DEVICE := picasso2
 PRODUCT_BRAND := Acer
-PRODUCT_MODEL := A510
+PRODUCT_MODEL := Picasso 2
 PRODUCT_MANUFACTURER := Acer

@@ -1,4 +1,4 @@
-TARGET_BOOTLOADER_BOARD_NAME := picasso_m
+TARGET_BOOTLOADER_BOARD_NAME := picasso
 
 TARGET_BOARD_PLATFORM := tegra3
 
@@ -25,13 +25,13 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 629145600
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 29905387520
 BOARD_FLASH_BLOCK_SIZE := 4096
 
-TARGET_KERNEL_SOURCE := kernel/acer/t30
-TARGET_KERNEL_CONFIG := picasso_m_recovery_defconfig
+TARGET_KERNEL_SOURCE := kernel/nvidia/tegra3
+TARGET_KERNEL_CONFIG := picasso_recovery_defconfig
 
-BOARD_CUSTOM_BOOTIMG_MK := device/acer/a510/custombootimg.mk
+BOARD_CUSTOM_BOOTIMG_MK := device/acer/picasso2/custombootimg.mk
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/acer/a510/twrp.fstab
+TARGET_RECOVERY_FSTAB := device/acer/picasso2/twrp.fstab
 BOARD_HAS_NO_SELECT_BUTTON := true
 
 # TWRP

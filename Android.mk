@@ -14,6 +14,6 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter $(TARGET_BOOTLOADER_BOARD_NAME), picasso_m),)
+ifeq ($(TARGET_DEVICE), picasso2)
 	include $(call all-makefiles-under, $(LOCAL_PATH))
 endif

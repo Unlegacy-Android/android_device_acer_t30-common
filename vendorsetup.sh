@@ -1,1 +1,1 @@
-add_lunch_combo aosp_a510-userdebug
+add_lunch_combo aosp_picasso2-userdebug
