@@ -24,9 +24,6 @@ on post-fs-data
     mkdir /data/nvcam 0700 media camera
     chown dhcp dhcp /data/misc/dhcp
 
-    mkdir /data/gps 770 gps system
-    chown gps system /data/gps
-
     # Set indication (checked by vold) that we have finished this action
     setprop vold.post_fs_data_done 1
 
@@ -121,6 +118,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
 
 # Start GPS daemon
 on boot
+  mkdir /data/gps 1770 gps system
   write /sys/class/gpio/export 162
   write /sys/class/gpio/export 163
   write /sys/class/gpio/gpio162/direction out
@@ -128,15 +126,17 @@ on boot
   write /sys/class/gpio/gpio163/direction out
   write /sys/class/gpio/gpio163/value 1
   chmod 0660 /sys/class/gpio/gpio162/value
-  chown gps gps /sys/class/gpio/gpio162/value
+  chown gps system /sys/class/gpio/gpio162/value
   chmod 0660 /sys/class/gpio/gpio163/value
-  chown gps gps /sys/class/gpio/gpio162/value
+  chown gps system /sys/class/gpio/gpio163/value
+  chmod 0660 /dev/ttyHS1
+  chown gps system /dev/ttyHS1
 
-service gps-daemon /vendor/bin/gpsd -c /system/etc/gps/gpsconfig.xml
-  class late_start
+service gpsd /vendor/bin/gpsd -c /system/etc/gps.xml
+  class main
   socket gps seqpacket 0660 gps system
   user gps
-  group system inet sdcard_rw sdcard_r
+  group system wakelock inet sdcard_rw
 
 # DOCK2 Setting & start service
 on boot
