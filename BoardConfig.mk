@@ -4,7 +4,7 @@ TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := picasso
 TARGET_OTA_ASSERT_DEVICE := picasso2,a510,a700,picasso_m,picasso_mf,a510_emea_cus1,a700_emea_cus1
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=picasso
+BOARD_KERNEL_CMDLINE := androidboot.hardware=picasso androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x10000000
 BOARD_KERNEL_PAGESIZE := 2048
 
