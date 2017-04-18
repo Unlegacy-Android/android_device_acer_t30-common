@@ -13,8 +13,8 @@ on fs
     setprop ro.crypto.umount_sd false
     mount_all /fstab.picasso
 
-# used to ensure lcd_density is only written once
 on load_system_props_action
+    # used to ensure lcd_density is only written once
     setprop sf.lcd_density.written 0
 
 on post-fs-data
@@ -28,63 +28,82 @@ on post-fs-data
     setprop vold.post_fs_data_done 1
 
 on boot
-
-# Create basic usb host device node for USB host manager monitor
+    # Create basic usb host device node for USB host manager monitor
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
-# bluetooth
-    # UART device
+    # Bluetooth UART device
     chmod 0660 /dev/ttyHS2
     chown bluetooth net_bt_stack /dev/ttyHS2
 
-    # power up/down interface
+    # Bluetooth power up/down interface
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
     chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
 
-    # bluetooth MAC address programming
+    # Bluetooth MAC address programming
     chown bluetooth net_bt_stack ro.bt.bdaddr_path
     chown bluetooth net_bt_stack /system/etc/bluetooth
     chown bluetooth net_bt_stack /data/misc/bluetooth
     setprop ro.bt.bdaddr_path "/sys/dev-info_eeprom/BTMAC"
 
-    # bluetooth LPM
+    # Bluetooth LPM
     chmod 0220 /proc/bluetooth/sleep/lpm
     chmod 0220 /proc/bluetooth/sleep/btwrite
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/lpm
     chown bluetooth net_bt_stack /proc/bluetooth/sleep/btwrite
 
-# nvdps
+    # nvdps
     chown system system /sys/class/graphics/fb0/device/nvdps
 
-# backlight
+    # Backlight
     chown system system /sys/class/backlight/pwm-backlight/brightness
 
-# powerkey led
+    # Powerkey led
     chown system system /sys/class/leds/acer-leds/brightness
 
-# didim
+    # DIDIM
     chown system system /sys/class/graphics/fb0/device/smartdimmer/enable
 
-# eeprom
+    # EEPROM
     chown system system /sys/at24/SerialNumberwithoutBarcode
     chown system system /sys/at24/ManufactureDate
     chmod 0664 /dev/at24_dev
     chown system system /dev/at24_dev
 
-# ALS
+    # ALS
     chown system system /sys/devices/platform/stk-oss/als_enable
 
-# Sensor
+    # Sensor
     chown system system /sys/bus/iio/devices/device0/als_ir_mode
     chown system system /sys/bus/iio/devices/device0/als_enable
     chown system system /sys/bus/iio/devices/device0/proximity_enable
 
-# Default Read Ahead value for sdcards
+    # GPS
+    mkdir /data/gps 1770 gps system
+    write /sys/class/gpio/export 162
+    write /sys/class/gpio/export 163
+    write /sys/class/gpio/gpio162/direction out
+    write /sys/class/gpio/gpio162/value 0
+    write /sys/class/gpio/gpio163/direction out
+    write /sys/class/gpio/gpio163/value 1
+    chmod 0660 /sys/class/gpio/gpio162/value
+    chown gps system /sys/class/gpio/gpio162/value
+    chmod 0660 /sys/class/gpio/gpio163/value
+    chown gps system /sys/class/gpio/gpio163/value
+    chmod 0660 /dev/ttyHS1
+    chown gps system /dev/ttyHS1
+
+    # Default Read Ahead value for sdcards
     write /sys/block/mmcblk0/queue/read_ahead_kb 2048
     write /sys/block/mmcblk1/queue/read_ahead_kb 2048
+
+    # DOCK2 Setting & start service
+    chmod 0660 /sys/dock/dock
+    chown system system /sys/dock/dock
+    chmod 0660 /sys/dock/dockin
+    chown system system /sys/dock/dockin
 
 service p2p_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
@@ -116,51 +135,29 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-# Start GPS daemon
-on boot
-  mkdir /data/gps 1770 gps system
-  write /sys/class/gpio/export 162
-  write /sys/class/gpio/export 163
-  write /sys/class/gpio/gpio162/direction out
-  write /sys/class/gpio/gpio162/value 0
-  write /sys/class/gpio/gpio163/direction out
-  write /sys/class/gpio/gpio163/value 1
-  chmod 0660 /sys/class/gpio/gpio162/value
-  chown gps system /sys/class/gpio/gpio162/value
-  chmod 0660 /sys/class/gpio/gpio163/value
-  chown gps system /sys/class/gpio/gpio163/value
-  chmod 0660 /dev/ttyHS1
-  chown gps system /dev/ttyHS1
-
 service gpsd /vendor/bin/gpsd -c /system/etc/gps.xml
-  class main
-  socket gps seqpacket 0660 gps system
-  user gps
-  group system wakelock inet sdcard_rw
-
-# DOCK2 Setting & start service
-on boot
-    chmod 0660 /sys/dock/dock
-    chown system system /sys/dock/dock
-    chmod 0660 /sys/dock/dockin
-    chown system system /sys/dock/dockin
+    class main
+    socket gps seqpacket 0660 gps system
+    user gps
+    group system wakelock inet sdcard_rw
 
 # TODO: Use this?
 # service acer_dock_detect /system/bin/acer_dock_daemon
 #     class late_start
 #     user system
 
-# detect A510/A700 and set appropriate density
 on property:persist.sys.NV_DISPXRES=1280 && property:sf.lcd_density.written=0
+    # detect A510 and set appropriate density
     setprop ro.sf.lcd_density 160
     setprop sf.lcd_density.written 1
 
 on property:persist.sys.NV_DISPXRES=1920 && property:sf.lcd_density.written=0
+    # detect A700 and set appropriate density
     setprop ro.sf.lcd_density 240
     setprop sf.lcd_density.written 1
 
-# Disable 3G on A700/A510
 on property:ro.boot.carrier=wifi-only
+    # Disable 3G on A700/A510
     setprop ro.radio.noril yes
     setprop telephony.sms.receive false
     setprop telephony.sms.send false
