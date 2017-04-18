@@ -48,7 +48,7 @@ PRODUCT_COPY_FILES += \
 
 PRODUCT_COPY_FILES += \
     device/acer/picasso2/camera/nvcamera.conf:system/etc/nvcamera.conf \
-    device/acer/picasso2/gps/gpsconfig.xml:system/etc/gps/gpsconfig.xml \
+    device/acer/picasso2/gps/gps.xml:system/etc/gps.xml \
     device/acer/picasso2/ppp/ip-up:system/etc/ppp/ip-up \
     device/acer/picasso2/ppp/ip-down:system/etc/ppp/ip-down \
     device/acer/picasso2/touchscreen/atmel-maxtouch.idc:system/usr/idc/atmel-maxtouch.idc \

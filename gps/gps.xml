@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <glgps xmlns="http://www.glpals.com/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.glpals.com/ glconfig.xsd" >
 
-<!-- It is highly recommended to view/edit this file with syntax-highlighting 
-    editors such as notepad++ or vim. This way, one can easily distinguish 
+<!-- It is highly recommended to view/edit this file with syntax-highlighting
+    editors such as notepad++ or vim. This way, one can easily distinguish
     comments and valid code.
-    
+
     This file is a primary template for Linux-like platforms.
 -->
 
 <!-- HAL essentials: Serial port, log, NMEA, IRM, NVRAM, LTO -->
-<hal 
-    acPortName="/dev/ttyHS1" 
-    lBaudRate="115200"  
-    
+<hal
+    acPortName="/dev/ttyHS1"
+    lBaudRate="115200"
+
     cLogEnabled="false"
     acLogDirectory="/data/gps/log/"
 
-    acNmeaOutName="/data/gpspipe"  
+    acNmeaOutName="/data/gpspipe"
 
     ctrlPipe="/data/gps/glgpsctrl"
     acNvStoDir="/data/gps/"
-    
-    ltoFileName="lto.dat" 
+
+    ltoFileName="lto.dat"
 />
 
 <!-- GPIO is essential for reliable host interface reset and power saving.
-    There are currently two mutually exclusive mechanisms (sysfs or rfkill) to 
+    There are currently two mutually exclusive mechanisms (sysfs or rfkill) to
     GPIO control the REGPU or NSTANDBY pin on the GNSS chipset.
 -->
 
 <!-- GPIO sysfs (in most cases) -->
-<hal 
+<hal
     gpioNStdbyPath="/sys/class/gpio/gpio162/value"
-    gpioNResetPath="/sys/class/gpio/gpio163/value" 
+    gpioNResetPath="/sys/class/gpio/gpio163/value"
     gpioDelayMs="100"
 />
 
@@ -45,14 +45,14 @@
 <!--  Re-aiding type (0-none, 1-SUPL, 2-LBS, 3-LBS and SUPL)
       Re-aiding retry interval in seconds.
       Re-aiding interval in seconds. -->
-<hal 
+<hal
     ReAidingType="0"
     ReAidingRetryIntervalSec="20"
     ReAidingIntervalSec="1200"
 />
 
 <!-- Location-Base-Services (LBS)  -->
-<hal 
+<hal
     LbsEnable="true"
     LbsLocal="false"
     LbsServer="bcmls2.glpals.com"
@@ -63,7 +63,7 @@
 <!-- SUPL: only applicable to devices with cellular modem
     "arp-supl-use-apn" is attribute used in Android only
  -->
-<hal 
+<hal
     arp-supl-enable="false"
     arp-supl-cap-msb="false"
     arp-supl-cap-msa="false"
@@ -83,37 +83,37 @@
 
 <!-- Control Plane: only applicable to devices with cellular modem-->
 <hal
-    LPmode="false" 
+    LPmode="false"
 />
 
 <!-- Sensors: Valid on Android 2.3 or higher -->
-<hal 
+<hal
     SensorsEnable="false"
     SensorsMask="0F"
     SensorsLog="true"
     SensorsType="5"
-    SensorsMoEnable="true" 
+    SensorsMoEnable="true"
     SensorsTurnEnable="false"
-    SensorsRawAcclGyroEnable="false" 
-    
+    SensorsRawAcclGyroEnable="false"
+
     SensorsStepEnable="false"
 />
 
 <!-- GLL Engine: See glgpsapi.h for supported parameters -->
-<gll 
+<gll
     LogPriMask="LOG_INFO"
     LogFacMask="LOG_GLLAPI | LOG_NMEA"
-    FrqPlan="FRQ_PLAN_26MHZ_2PPM"   
-    RfType="GL_RF_47511_BRCM_EXT_LNA"   
+    FrqPlan="FRQ_PLAN_26MHZ_2PPM"
+    RfType="GL_RF_47511_BRCM_EXT_LNA"
     WarmStandbyTimeout1Seconds="0"
     WarmStandbyTimeout2Seconds="0"
 />
 
 <!-- Pulse-Per-Second (PPS) -->
 <gll
-    pps-enable="false" 
-    pps-offset-ms="0" 
-    pps-width-ns="100" 
+    pps-enable="false"
+    pps-offset-ms="0"
+    pps-width-ns="100"
 />
 
 <!-- List of jobs can be performed by the GPS controller    -->
@@ -129,7 +129,7 @@
 <job id="Simulator_Periodic">
     <task id="cont" repeat="1">
         <startup ignore_rom_alm="true" />
-        <req_pos validfix="2000" duration_sec="4500"/>      
+        <req_pos validfix="2000" duration_sec="4500"/>
     </task>
 </job>
 
@@ -178,7 +178,7 @@
     </task>
 </job>
 
-<!-- Systematic Test: Repetitive cold starts with the ROM almanac ignored for 
+<!-- Systematic Test: Repetitive cold starts with the ROM almanac ignored for
         simulator testing -->
 <job id="Simulator_Cold_Starts">
     <task repeat="100">
@@ -194,7 +194,7 @@
     </task>
 </job>
 
-<!-- Systematic Test: Repetetive warm starts  
+<!-- Systematic Test: Repetetive warm starts
      Stored ephemeris data is discarded before the start begins
      This simulates GPS receiver start after it was left off for more that 4 hours
 -->
@@ -208,9 +208,9 @@
 <!-- Systematic Test: Repetetive warm starts performed on GPS simulator -->
 <job id="Simulator_Warm_Starts">
     <task repeat="100">
-        <startup 
+        <startup
             ignore_rom_alm="true"
-            ignore_nav="true" 
+            ignore_nav="true"
         />
         <req_pos validfix="1"/>
     </task>
@@ -227,22 +227,22 @@
 <job id="Far_Starts">
     <task repeat="100">
         <!-- Instructs GLL to ignore all elements stored in NVRAM listed below -->
-        <startup 
-            ignore_nav="true" 
+        <startup
+            ignore_nav="true"
             pos_error="true"
         />
         <req_pos validfix="1" />
     </task>
 </job>
 
-<!-- This job performes series of single shot requests using the data stored 
-      in NVRAM to simulate assistance data received from the network 
-      The QoS parameters are set to maxmize the GPS sensitivity 
+<!-- This job performes series of single shot requests using the data stored
+      in NVRAM to simulate assistance data received from the network
+      The QoS parameters are set to maxmize the GPS sensitivity
 -->
 <job id="Assisted_Cold_Starts">
     <task repeat="100">
-        <startup 
-            ignore_rom_alm="true" 
+        <startup
+            ignore_rom_alm="true"
             ignore_ram_alm="true"
         />
         <asst>
@@ -255,15 +255,15 @@
     </task>
 </job>
 
-<!-- This job performes series of single shot requests using the data stored 
-      in NVRAM to simulate assistance data received from the network 
-      The QoS parameters are set as it woudld be set by Spirent ULTS executing 
+<!-- This job performes series of single shot requests using the data stored
+      in NVRAM to simulate assistance data received from the network
+      The QoS parameters are set as it woudld be set by Spirent ULTS executing
       3GPP TS performance tests.
 -->
 <job id="3GPP_Assisted_Cold_Starts">
     <task repeat="100">
-        <startup 
-            ignore_rom_alm="true" 
+        <startup
+            ignore_rom_alm="true"
             ignore_ram_alm="true"
         />
         <asst>
@@ -276,9 +276,9 @@
     </task>
 </job>
 
-<!-- This job starts signle chanel factory test mode 
-     The signal is expected to be in the range from -125 dBm to -145 dBm 
-     with the frequency offset range from -2 ppm to +2 ppm 
+<!-- This job starts signle chanel factory test mode
+     The signal is expected to be in the range from -125 dBm to -145 dBm
+     with the frequency offset range from -2 ppm to +2 ppm
      for this mode to provide reliable results.
 -->
 <job id="Factory_Track_Test">
@@ -294,21 +294,21 @@
         <req_ftest
             PRN="1"
             GL_FACT_TEST_MODE="GL_FACT_TEST_CONT"
-            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER" 
-            avg_int_sec="10" 
+            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER"
+            avg_int_sec="10"
             duration_sec="60"
         />
     </task>
 </job>
 
-<!-- This job starts signle chanel factory test mode 
-     The signal is expected to be in the range from -125 dBm to -145 dBm 
-     with the frequency offset range from -2 ppm to +2 ppm 
+<!-- This job starts signle chanel factory test mode
+     The signal is expected to be in the range from -125 dBm to -145 dBm
+     with the frequency offset range from -2 ppm to +2 ppm
      for this mode to provide reliable results.
 
      The name Factory_High_SNR is legacy only. The recommended name is
-     Factory_Track_Test.     
--->    
+     Factory_Track_Test.
+-->
 <job id="Factory_High_SNR">
     <task id="test" repeat="1">
         <startup
@@ -322,19 +322,19 @@
         <req_ftest
             PRN="1"
             GL_FACT_TEST_MODE="GL_FACT_TEST_CONT"
-            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER" 
-            avg_int_sec="10" 
+            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER"
+            avg_int_sec="10"
             duration_sec="60"
         />
      </task>
 </job>
 
-<!-- This job is intended to be ran after the Factory_High_SNR job 
+<!-- This job is intended to be ran after the Factory_High_SNR job
      It uses the TCXO offset stored in NVRAM during the Factory_High_SNR job.
 
-     This is a low-signal strength acquisition only test. It performs repeated 
-     acquisitions but no tracking, hence it cannot be used to produce, for 
-     example, WER measurements.     
+     This is a low-signal strength acquisition only test. It performs repeated
+     acquisitions but no tracking, hence it cannot be used to produce, for
+     example, WER measurements.
 -->
 <job id="Factory_Low_SNR">
     <task id="test" repeat="1">
@@ -349,8 +349,8 @@
         <req_ftest
             PRN="1"
             GL_FACT_TEST_MODE="GL_FACT_TEST_CONT"
-            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER" 
-            avg_int_sec="10" 
+            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER"
+            avg_int_sec="10"
             duration_sec="200"
         />
      </task>
@@ -369,8 +369,8 @@
         <req_ftest
             PRN="1"
             GL_FACT_TEST_MODE="GL_FACT_TEST_CONT"
-            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER" 
-            avg_int_sec="10" 
+            GL_FACT_TEST_ITEMS="GL_FACT_TEST_WER"
+            avg_int_sec="10"
             duration_sec="200"
         />
     </task>
