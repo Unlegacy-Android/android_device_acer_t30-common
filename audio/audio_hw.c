@@ -242,7 +242,6 @@ static size_t get_input_buffer_size(uint32_t sample_rate, int format,
                                     int channel_count)
 {
     size_t size;
-    size_t device_rate;
 
     if (check_input_parameters(sample_rate, format, channel_count) != 0)
         return 0;
@@ -320,10 +319,8 @@ static int out_set_parameters(struct audio_stream *stream, const char *kvpairs)
     struct tiny_stream_out *out = (struct tiny_stream_out *)stream;
     struct tiny_audio_device *adev = out->adev;
     struct str_parms *parms;
-    char *str;
     char value[32];
     int ret, val = 0;
-    bool force_input_standby = false;
 
     parms = str_parms_create_str(kvpairs);
 
@@ -592,8 +589,8 @@ static ssize_t read_frames(struct tiny_stream_in *in, void *buffer, ssize_t fram
                     &frames_rd);
         } else {
             struct resampler_buffer buf = {
-                    { raw : NULL, },
-                    frame_count : frames_rd,
+                    { .raw = NULL, },
+                    .frame_count = frames_rd,
             };
             get_next_buffer(&in->buf_provider, &buf);
             if (buf.raw != NULL) {
@@ -674,7 +671,7 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
 {
     struct tiny_audio_device *adev = (struct tiny_audio_device *)dev;
     struct tiny_stream_out *out;
-    int i, ret;
+    int i;
 
     out = calloc(1, sizeof(struct tiny_stream_out));
     if (!out)
@@ -741,14 +738,9 @@ static int adev_open_output_stream(struct audio_hw_device *dev,
 
     *stream_out = &out->stream;
     return 0;
-
-err_open:
-    free(out);
-    *stream_out = NULL;
-    return ret;
 }
 
-static void adev_close_output_stream(struct audio_hw_device *dev,
+static void adev_close_output_stream(struct audio_hw_device *dev __unused,
                                      struct audio_stream_out *stream)
 {
     struct tiny_stream_out *out = (struct tiny_stream_out *)stream;
@@ -902,7 +894,6 @@ err:
     if (in->resampler)
         release_resampler(in->resampler);
     free(in->buffer);
-err_open:
     free(in);
     *stream_in = NULL;
     return ret;
@@ -981,7 +972,7 @@ static void adev_config_start(void *data, const XML_Char *elem,
     const XML_Char *val = NULL;
     const XML_Char *alsa_card = NULL;
     const XML_Char *alsa_dev = NULL;
-    unsigned int i, j;
+    unsigned int i;
 
     for (i = 0; attr[i]; i += 2) {
 	if (strcmp(attr[i], "name") == 0)
@@ -1128,7 +1119,6 @@ static int adev_config_parse(struct tiny_audio_device *adev)
     struct config_parse_state s;
     FILE *f;
     XML_Parser p;
-    char property[PROPERTY_VALUE_MAX];
     char file[] = "/system/etc/tiny_hw.xml";
     int ret = 0;
     bool eof = false;
@@ -1172,9 +1162,9 @@ static int adev_config_parse(struct tiny_audio_device *adev)
 	}
     }
 
- out_parser:
+out_parser:
     XML_ParserFree(p);
- out:
+out:
     fclose(f);
 
     return ret;
