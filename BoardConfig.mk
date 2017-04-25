@@ -51,5 +51,7 @@ BOARD_SEPOLICY_DIRS += \
 	device/acer/picasso2/sepolicy
 
 # Recovery
+LZMA_RAMDISK_TARGETS := recovery
+TARGET_NOT_USE_GZIP_RECOVERY_RAMDISK := true
 TARGET_RECOVERY_FSTAB := device/acer/picasso2/rootdir/fstab.picasso
 BOARD_HAS_NO_SELECT_BUTTON := true
