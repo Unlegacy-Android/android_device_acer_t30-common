@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "245438b0_e391f245",
+        "filename": "sepolicy/audioserver.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2017-04-30T08:16:24Z",
+      "side": 1,
+      "message": "rw_file_perms",
+      "range": {
+        "startLine": 1,
+        "startChar": 40,
+        "endLine": 1,
+        "endChar": 65
+      },
+      "revId": "df8839f20f55112bdcce60ec688996cd4ff3457e",
+      "serverId": "d5e41ece-075f-43fb-b5a6-48951f3d7b1d",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "245438b0_8396fe3a",
+        "filename": "sepolicy/mediacodec.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2017-04-30T08:16:24Z",
+      "side": 1,
+      "message": "rw_file_perms",
+      "range": {
+        "startLine": 1,
+        "startChar": 40,
+        "endLine": 1,
+        "endChar": 65
+      },
+      "revId": "df8839f20f55112bdcce60ec688996cd4ff3457e",
+      "serverId": "d5e41ece-075f-43fb-b5a6-48951f3d7b1d",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "245438b0_a39bfa63",
+        "filename": "sepolicy/system_server.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2017-04-30T08:16:24Z",
+      "side": 1,
+      "message": "r_dir_perms",
+      "range": {
+        "startLine": 7,
+        "startChar": 29,
+        "endLine": 7,
+        "endChar": 42
+      },
+      "revId": "df8839f20f55112bdcce60ec688996cd4ff3457e",
+      "serverId": "d5e41ece-075f-43fb-b5a6-48951f3d7b1d",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "245438b0_43a1e696",
+        "filename": "sepolicy/uncrypt.te",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2017-04-30T08:16:24Z",
+      "side": 1,
+      "message": "rw_file_perms",
+      "range": {
+        "startLine": 1,
+        "startChar": 35,
+        "endLine": 1,
+        "endChar": 49
+      },
+      "revId": "df8839f20f55112bdcce60ec688996cd4ff3457e",
+      "serverId": "d5e41ece-075f-43fb-b5a6-48951f3d7b1d",
+      "unresolved": false
+    }
+  ]
+}
